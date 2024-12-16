@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/registro")
 public class FormServlet extends HttpServlet {
@@ -26,28 +28,28 @@ public class FormServlet extends HttpServlet {
                 && request.getParameter("habilitar").equals("on");
         String secreto = request.getParameter("secreto");
 
-        List<String> errores = new ArrayList<>();
+        Map<String, String> errores = new HashMap<>();
 
         if (username == null || username.isBlank()) {
-            errores.add("El user name es requerido.");
+            errores.put("username", "El user name es requerido.");
         }
         if (password == null || password.isBlank()) {
-            errores.add("El password no puede ser vacio.");
+            errores.put("password", "El password no puede ser vacio.");
         }
         if (email == null || !email.contains("@")) {
-            errores.add("El email es requerido y debe tener formato de correo.");
+            errores.put("email", "El email es requerido y debe tener formato de correo.");
         }
         if (pais == null || pais.isBlank() || pais.equals("")) {
-            errores.add("El pais es requerido.");
+            errores.put("pais", "El pais es requerido.");
         }
         if (lenguajes == null || lenguajes.length == 0) {
-            errores.add("El lenguaje es querido. Debe seleccionar almenos un tema.");
+            errores.put("lenguajes", "El lenguaje es querido. Debe seleccionar almenos un tema.");
         }
         if (roles == null || roles.length == 0) {
-            errores.add("Debe seleccionar al menos un rol.");
+            errores.put("roles","Debe seleccionar al menos un rol.");
         }
         if (idioma == null) {
-            errores.add("Debe seleccionar un idioma.");
+            errores.put("idioma","Debe seleccionar un idioma.");
         }
         response.setContentType("text/html;charset=UTF-8");
         if (errores.isEmpty()) {
