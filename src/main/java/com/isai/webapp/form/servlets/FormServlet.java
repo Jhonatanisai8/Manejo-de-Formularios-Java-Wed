@@ -11,7 +11,7 @@ import java.util.List;
 
 @WebServlet("/registro")
 public class FormServlet extends HttpServlet {
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //parametros que vamos a utilizar 
@@ -23,11 +23,11 @@ public class FormServlet extends HttpServlet {
         String[] roles = request.getParameterValues("roles");
         String idioma = request.getParameter("idioma");
         boolean habilitar = request.getParameter("habilitar") != null
-                && request.getParameter("habilitar").equals("on");        
+                && request.getParameter("habilitar").equals("on");
         String secreto = request.getParameter("secreto");
-        
+
         List<String> errores = new ArrayList<>();
-        
+
         if (username == null || username.isBlank()) {
             errores.add("El user name es requerido.");
         }
@@ -50,18 +50,17 @@ public class FormServlet extends HttpServlet {
             errores.add("Debe seleccionar un idioma.");
         }
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("       <title>Resultado del formulario.</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("   <h1>Resultado del formulario.</h1>");
-            out.println("   <ul>");
-            
-            if (errores.isEmpty()) {
-                
+        if (errores.isEmpty()) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("       <title>Resultado del formulario.</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("   <h1>Resultado del formulario.</h1>");
+                out.println("   <ul>");
+
                 out.println("       <li> Username: " + username + "</li>");
                 out.println("       <li> Password: " + password + "</li>");
                 out.println("       <li> Email:   " + email + "</li>");
@@ -71,7 +70,7 @@ public class FormServlet extends HttpServlet {
                     out.println("       <li> Lenguaje:   " + lenguaje + "</li>");
                 });
                 out.print("         </ul></li>");
-                
+
                 out.print("         <li>Roles: <ul>");
                 Arrays.asList(roles).forEach(rol -> {
                     out.println("       <li> Rol:   " + rol + "</li>");
@@ -80,16 +79,18 @@ public class FormServlet extends HttpServlet {
                 out.println("       <li> Idioma: " + idioma + "</li>");
                 out.println("       <li> Habilitado:   " + habilitar + "</li>");
                 out.println("       <li> Secreto:   " + secreto + "</li>");
-            } else {
-                errores.forEach((t) -> {
+                out.println("   </ul>");
+                out.println("</body>");
+                out.println("</html>");
+            }
+        } else {
+            /*  errores.forEach((t) -> {
                     out.println("<li>" + t + "</li>");
                 });
-                out.println("<p><a href = \"/clase02formularios/index.html\">Volver</p>");
-            }
-            out.println("   </ul>");
-            out.println("</body>");
-            out.println("</html>");
+                out.println("<p><a href = \"/clase02formularios/index.html\">Volver</p>");*/
+            request.setAttribute("errores", errores);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
-    
+
 }
