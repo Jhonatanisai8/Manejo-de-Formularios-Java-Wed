@@ -19,6 +19,9 @@ public class FormServlet extends HttpServlet {
         String pais = request.getParameter("pais");
         String[] lenguajes = request.getParameterValues("lenguajes");
         String[] roles = request.getParameterValues("roles");
+        String idioma = request.getParameter("idioma");
+        String habilitar = request.getParameter("habilitar");
+        String secreto = request.getParameter("secreto");
 
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -39,12 +42,15 @@ public class FormServlet extends HttpServlet {
                 out.println("       <li> Lenguaje:   " + lenguaje + "</li>");
             });
             out.print("         </ul></li>");
-            
+
             out.print("         <li>Roles: <ul>");
             Arrays.asList(roles).forEach(rol -> {
                 out.println("       <li> Rol:   " + rol + "</li>");
             });
             out.print("         </ul></li>");
+            out.println("       <li> Idioma: " + idioma + "</li>");
+            out.println("       <li> Habilitado:   " + habilitar + "</li>");
+            out.println("       <li> Secreto:   " + secreto + "</li>");
             out.println("   </ul>");
             out.println("</body>");
             out.println("</html>");
