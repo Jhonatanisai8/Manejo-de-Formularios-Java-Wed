@@ -14,7 +14,7 @@
         <div class="px-5">
             <h1>Formulario de Usuarios.</h1>
             <%if(errores != null && errores.size() > 0){%>
-            <ul class = "alert alert-danger">
+            <ul class = "alert alert-danger mx-5 px-5">
                 <% for(String  error: errores.values()){%>
                 <li> <%=error%></li>
                     <%}%>      
@@ -82,12 +82,12 @@
                     <div class = "col-sm-4">
                         <!-- para que nos permita selecioanar multiples opciones -->
                         <select name="lenguajes" id="lenguajes" multiple class = "form-select">
-                            <option value="java" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("java")).get()?'selected' : ''} >Java</option>
-                            <option value="jakartaee" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("jakartaee")).get()?'selected' : ''} >Jakarta EE 9</option>
-                            <option value="spring" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("spring")).get()?'selected' : ''} >Spring Boot</option>
-                            <option value="js" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("js")).get()?'selected' : ''} >JavaScript</option>
-                            <option value="angular" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("angular")).get()?'selected' : ''} >Angular</option>
-                            <option value="react" ${paramValues.lenguajes.stream().allMatch(v -> v.equals("react")).get()?'selected' : ''} >React</option>
+                            <option value="java" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("java")).get()?'selected' : ''} >Java</option>
+                            <option value="jakartaee" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("jakartaee")).get()?'selected' : ''} >Jakarta EE 9</option>
+                            <option value="spring" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("spring")).get()?'selected' : ''} >Spring Boot</option>
+                            <option value="js" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("js")).get()?'selected' : ''} >JavaScript</option>
+                            <option value="angular" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("angular")).get()?'selected' : ''} >Angular</option>
+                            <option value="react" ${paramValues.lenguajes.stream().anyMatch(v -> v.equals("react")).get()?'selected' : ''} >React</option>
                         </select>
                     </div>
                     <%
