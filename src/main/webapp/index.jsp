@@ -11,7 +11,7 @@
 
     </head>
     <body>
-        <div class="px-5">
+        <div class="container-xl px-5">
             <h1>Formulario de Usuarios.</h1>
             <%if(errores != null && errores.size() > 0){%>
             <ul class = "alert alert-danger mx-5 px-5">
